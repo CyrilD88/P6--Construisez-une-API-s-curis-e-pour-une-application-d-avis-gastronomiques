@@ -1,7 +1,11 @@
 /*=================================================================== Création du server ============================================================*/
 /*===================================================================================================================================================*/
 
+
+//importation du package HTTP de Node.JS pour avoir les outils pour créer le serveur
 const http = require('http');
+
+//importation de l'application app.js
 const app = require('./app');
 
 
@@ -17,7 +21,7 @@ const normalizePort = val => {
   }
   return false;
 };
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT ||'3000');
 app.set('port', port);
 
 
@@ -43,10 +47,10 @@ const errorHandler = error => {
   }
 };
 
-const server = http.createServer(app);
+const server = http.createServer(app);  // création du server
 
 
-//Ecoute du port utilisé
+//Le serveur écoute les requêtes sur le port
 server.on('error', errorHandler);
 server.on('listening', () => {
   const address = server.address();

@@ -7,6 +7,7 @@ const userCtrl = require('../controllers/user'); //importer le controllers pour 
 
 // Création des routes par le frontend
 router.post('/signup', userCtrl.signup );  
+
 router.post('/login', userCtrl.login );
 
-module.exports = router;
+module.exports = router;   

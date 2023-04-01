@@ -1,16 +1,23 @@
 const dotenv = require('dotenv').config();
 
-
 //////////////////////////////////////////////////////////////////////////////Création des constanstes///////////////////////////////////////////////////////////////////////
 const password = process.env.DB_PASSWORD;
 const username = process.env.DB_USER;
-const express = require ('express'); // importer express
 
-const userRoutes = require('./routes/user');
+// importer 
+const express = require ('express'); 
+const mongoose = require('mongoose');
+const morgan = require('morgan');
+const cors = require ('cors');
 
-const app = express(); // crééer une application express
+// crééer une application express
+const app = express(); 
 
-const mongoose = require('mongoose')
+//pour logger les request et les responses et les mettre en couleur 
+app.use(morgan("dev"));
+
+
+////////////////////////////////////////////////////////////////////////// Connexion à MongoDB avec mongoose////////////////////////
 mongoose.connect(`mongodb+srv://${username}:${password}@cluster0.bugrigf.mongodb.net/?retryWrites=true&w=majority`,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
@@ -26,14 +33,20 @@ app.use((req, res, next) => {
   next();
 });
 
+//permet de protéger les en-têtes 
+app.use(cors());
 
+//rend le corps des requêtes au format json  => en objet JS utilisable -- avant c'était body-parser
+app.use(express.json());
+
+
+//importartion des routes 
+const userRoutes = require('./routes/user');
 
   // Enregistrement des routes 
 
-app.use('/api/auth', userRoutes);
+app.use('/api/auth', userRoutes); 
 
 
-
- 
-
-module.exports = app;  //exporter l'appliclation pour y accéder depuis les autres fichiers du projet
+//exporter l'appliclation pour y accéder depuis les autres fichiers du projet
+module.exports = app;  
