@@ -9,6 +9,7 @@ const express = require ('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const cors = require ('cors');
+const path = require('path');
 
 // crééer une application express
 const app = express(); 
@@ -42,11 +43,12 @@ app.use(express.json());
 
 //importartion des routes 
 const userRoutes = require('./routes/user');
-
+const sauceRoutes = require('./routes/sauce');
   // Enregistrement des routes 
 
-app.use('/api/auth', userRoutes); 
-
+app.use('/api/auth', userRoutes);
+app.use('/api/sauces', sauceRoutes) 
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 //exporter l'appliclation pour y accéder depuis les autres fichiers du projet
 module.exports = app;  
