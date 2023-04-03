@@ -10,9 +10,14 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const cors = require ('cors');
 const path = require('path');
+const helmet = require('helmet'); //définit divers en-têtes HTTP sécurisées
 
 // crééer une application express
 const app = express(); 
+
+app.use(helmet(({
+  crossOriginResourcePolicy: false,
+})));
 
 //pour logger les request et les responses et les mettre en couleur 
 app.use(morgan("dev"));

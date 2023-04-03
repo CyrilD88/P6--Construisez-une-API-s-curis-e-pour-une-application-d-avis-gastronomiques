@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////////////Création des constanstes///////////////////////////////////////////////////////////////////////
 
 const Sauce = require('../models/sauce');
-const fs = require('fs');
+const fs = require('fs');// on appelle fs (filesystem) qui permet d'aller dans les fichiers
 
 
 /*Fonction de création de sauce 
@@ -50,10 +50,7 @@ exports.modifySauce = (req, res, next) => {
 };
 
 
-/*Fonction de suppression de sauce 
-On vérifie si l'userid à le droit de faire la suppression
-Si oui, on supprime la sauce ainsi que l'image grace à fs
-*/
+/*Fonction de suppression de sauce. On vérifie si l'userid à le droit de faire la suppression, et si oui, la sauce est supprimée ainsi que l'image grace à fs*/
 exports.deleteSauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
         .then(sauce => {
