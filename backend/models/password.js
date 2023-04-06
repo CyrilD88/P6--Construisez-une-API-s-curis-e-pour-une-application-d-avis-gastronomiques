@@ -9,7 +9,7 @@ let passwordSchema = new passwordValidator();
  
 //propriétés du schéma / entre 5 et 100 caractères, minuscule ET majuscule, au moins 2 chiffres, pas d'espace //////////
 passwordSchema
-.is().min(5)                                    // Minimum length 8
+.is().min(5)                                    // Minimum length 5
 .is().max(100)                                  // Maximum length 100
 .has().uppercase()                              // Must have uppercase letters
 .has().lowercase()                              // Must have lowercase letters
@@ -18,4 +18,10 @@ passwordSchema
 .is().not().oneOf(['Passw0rd', 'Password123']); // Blacklist these values
 
 //exorte le schéma
-module.exports = passwordSchema;
+module.exports = (req, res, next)=> {
+if (passwordSchema.validate(req.body.password)){
+    next()
+}else{
+    return res.status(400).json({ "error : le mot de passe n'est pas assez fort" : + passwordSchema.validate('req.body.password', {list:true})})
+}
+}
