@@ -15,7 +15,7 @@ const sauceCtrl = require('../controllers/sauce');
 
 
 /*Création des routes prévue par le frontend
-1- Controle du token pour les authorisation
+1- Controle du token pour les autorisations
 2- Multer pour les images
 3- Redirection vers la fonction souhaité
 */ 

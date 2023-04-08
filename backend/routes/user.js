@@ -1,8 +1,10 @@
-const express = require ('express'); // importer express
+// importer express
+const express = require ('express'); 
 const router = express.Router();
-const userCtrl = require('../controllers/user'); //importer le controllers pour les utilisateurs
-const password = require ('../models/password')
 
+//importer le controllers pour les utilisateurs
+const userCtrl = require('../controllers/user'); 
+const password = require ('../models/password')
 
 
 
